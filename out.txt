@@ -1,0 +1,294 @@
+﻿venv\Scripts\python.ex
+e : E
+At line:1 char:1
++ venv\Scripts\python.
+exe src/test_vision_ag
+ent.py 2>&1 | 
+Out-File -Fil ...
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (E:String)    
+ [], RemoteExcepti    
+on
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+======================
+======================
+======================
+====
+ERROR: 
+test_lambda_handler (_
+_main__.TestVisionAgen
+t.test_lambda_handler)
+----------------------
+----------------------
+----------------------
+----
+Traceback (most 
+recent call last):
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\u
+nittest\mock.py", 
+line 1393, in patched
+    with self.decorati
+on_helper(patched,
+         ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\c
+ontextlib.py", line 
+137, in __enter__
+    return 
+next(self.gen)
+           
+^^^^^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\u
+nittest\mock.py", 
+line 1375, in 
+decoration_helper
+    arg = exit_stack.e
+nter_context(patching)
+          ^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\c
+ontextlib.py", line 
+526, in enter_context
+    result = 
+_enter(cm)
+             
+^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\u
+nittest\mock.py", 
+line 1451, in 
+__enter__
+    self.target = 
+self.getter()
+                  
+^^^^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\p
+kgutil.py", line 513, 
+in resolve_name
+    mod = importlib.im
+port_module(modname)
+          ^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\A
+ppData\Local\Programs\
+Python\Python312\Lib\i
+mportlib\__init__.py",
+ line 90, in 
+import_module
+    return _bootstrap.
+_gcd_import(name[level
+:], package, level)
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
+  File "<frozen import
+lib._bootstrap>", 
+line 1387, in 
+_gcd_import
+  File "<frozen import
+lib._bootstrap>", 
+line 1360, in 
+_find_and_load
+  File "<frozen import
+lib._bootstrap>", 
+line 1331, in _find_an
+d_load_unlocked
+  File "<frozen import
+lib._bootstrap>", 
+line 935, in 
+_load_unlocked
+  File "<frozen import
+lib._bootstrap_externa
+l>", line 999, in 
+exec_module
+  File "<frozen import
+lib._bootstrap>", 
+line 488, in _call_wit
+h_frames_removed
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+src\lambda\vision_agen
+t.py", line 11, in 
+<module>
+    
+rekognition_client = b
+oto3.client('rekogniti
+on')
+                      
+   ^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\boto3\__init__.py", 
+line 93, in client
+    return _get_defaul
+t_session().client(*ar
+gs, **kwargs)
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\boto3\session.py", 
+line 337, in client
+    return self._sessi
+on.create_client(
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\context.py",
+ line 123, in wrapper
+    return 
+func(*args, **kwargs)
+           
+^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\session.py",
+ line 1031, in 
+create_client
+    client = client_cr
+eator.create_client(
+             ^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\client.py", 
+line 157, in 
+create_client
+    client_args = 
+self._get_client_args(
+                  
+^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\client.py", 
+line 557, in 
+_get_client_args
+    return args_creato
+r.get_client_args(
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\args.py", 
+line 121, in 
+get_client_args
+    final_args = self.
+compute_client_args(
+                 ^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\args.py", 
+line 259, in 
+compute_client_args
+    endpoint_config = 
+self._compute_endpoint
+_config(
+                      
+^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\args.py", 
+line 447, in _compute_
+endpoint_config
+    return self._resol
+ve_endpoint(**resolve_
+endpoint_kwargs)
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\args.py", 
+line 552, in 
+_resolve_endpoint
+    return endpoint_br
+idge.resolve(
+           ^^^^^^^^^^^
+^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\client.py", 
+line 671, in resolve
+    resolved = self.en
+dpoint_resolver.constr
+uct_endpoint(
+               ^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\regions.py",
+ line 233, in 
+construct_endpoint
+    result = self._end
+point_for_partition(
+             ^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abc\D
+esktop\SB\Cloud\automa
+ted-visual-governance\
+venv\Lib\site-packages
+\botocore\regions.py",
+ line 281, in _endpoin
+t_for_partition
+    raise 
+NoRegionError()
+botocore.exceptions.No
+RegionError: You must 
+specify a region.
+
+----------------------
+----------------------
+----------------------
+----
+Ran 1 test in 4.400s
+
+FAILED (errors=1)
