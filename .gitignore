@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# AWS CDK
+.cdk.staging/
+cdk.out/
+
+# Gemini/Antigravity
+.gemini/
+brain/
+out.txt
+system_explanation.md
+walkthrough.md
+task.md
+implementation_plan.md
