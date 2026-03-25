@@ -37,7 +37,7 @@ class VisualGovernanceStack(Stack):
             self, "VisionAgentLambda",
             runtime=_lambda.Runtime.PYTHON_3_9,
             handler="vision_agent.lambda_handler",
-            code=_lambda.Code.from_asset("src/lambda"),
+            code=_lambda.Code.from_asset("../src/lambda"),
             timeout=Duration.seconds(30),
             memory_size=512,
             environment={
@@ -68,3 +68,10 @@ class VisualGovernanceStack(Stack):
             s3.EventType.OBJECT_CREATED,
             s3_notifications.LambdaDestination(vision_agent_lambda)
         )
+
+# --- CDK App Entry Point ---
+from aws_cdk import App
+
+app = App()
+VisualGovernanceStack(app, "VisualGovernanceStack")
+app.synth()
