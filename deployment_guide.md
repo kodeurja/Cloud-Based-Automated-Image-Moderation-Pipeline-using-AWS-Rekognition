@@ -38,7 +38,6 @@ This step creates your S3 Buckets, the Lambda Robot, and the AI permissions.
 4. Deploy everything:
    ```bash
    cd infrastructure
-   cdk deploy
    ```
    *Wait for it to finish. It will give you the names of your new S3 buckets!*
 

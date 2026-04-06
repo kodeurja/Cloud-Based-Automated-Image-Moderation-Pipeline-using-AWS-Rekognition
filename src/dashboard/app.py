@@ -102,13 +102,21 @@ def upload_to_s3(file_bytes, bucket, file_name):
 def analyze_image_rekognition(file_bytes):
     rekognition = boto3.client('rekognition', region_name='us-east-1')
     try:
-        response = rekognition.detect_moderation_labels(Image={'Bytes': file_bytes})
-        labels = response.get('ModerationLabels', [])
-        harmful_score = max([l['Confidence'] for l in labels]) if labels else 0
+        # Detect Moderation Labels (Safety)
+        mod_response = rekognition.detect_moderation_labels(Image={'Bytes': file_bytes})
+        mod_labels = mod_response.get('ModerationLabels', [])
+        
+        # Detect General Labels (to check if image is blank)
+        gen_response = rekognition.detect_labels(Image={'Bytes': file_bytes}, MaxLabels=5)
+        gen_labels = gen_response.get('Labels', [])
+        
+        harmful_score = max([l['Confidence'] for l in mod_labels]) if mod_labels else 0
+        
         return {
             "harmful": round(harmful_score, 1),
             "safe": round(100 - harmful_score, 1),
-            "raw_labels": labels
+            "raw_labels": mod_labels,
+            "is_blank": (len(mod_labels) == 0 and len(gen_labels) == 0)
         }
     except Exception as e:
         st.error(f"Rekognition Error: {e}")
@@ -291,24 +299,27 @@ else:
                             prediction = analyze_image_rekognition(file_bytes)
                             
                             if s3_success and prediction:
-                                st.markdown("### 🎯 Safety Prediction")
-                                
-                                # Visual percentages
-                                h_pct = prediction['harmful']
-                                s_pct = prediction['safe']
-                                
-                                st.write(f"⚠️ **Harmful Content: {h_pct}%**")
-                                st.progress(h_pct / 100)
-                                
-                                st.write(f"✅ **Safe Content: {s_pct}%**")
-                                st.progress(s_pct / 100)
-                                
-                                if h_pct > 0:
-                                    st.warning(f"Detected {len(prediction['raw_labels'])} moderation categories.")
-                                    for label in prediction['raw_labels']:
-                                        st.write(f"- **{label['Name']}**: {round(label['Confidence'], 1)}% confidence")
+                                if prediction.get('is_blank'):
+                                    st.warning("📭 **Blank Image Detected**: No objects or moderation content found in this image. No safety prediction generated.")
                                 else:
-                                    st.success("No moderation violations detected. This content is safe.")
+                                    st.markdown("### 🎯 Safety Prediction")
+                                    
+                                    # Visual percentages
+                                    h_pct = prediction['harmful']
+                                    s_pct = prediction['safe']
+                                    
+                                    st.write(f"⚠️ **Harmful Content: {h_pct}%**")
+                                    st.progress(h_pct / 100)
+                                    
+                                    st.write(f"✅ **Safe Content: {s_pct}%**")
+                                    st.progress(s_pct / 100)
+                                    
+                                    if h_pct > 0:
+                                        st.warning(f"Detected {len(prediction['raw_labels'])} moderation categories.")
+                                        for label in prediction['raw_labels']:
+                                            st.write(f"- **{label['Name']}**: {round(label['Confidence'], 1)}% confidence")
+                                    else:
+                                        st.success("No moderation violations detected. This content is safe.")
                                     
                                 st.info(f"💾 Image archived in S3 as: `{file_name}`")
                             else:
