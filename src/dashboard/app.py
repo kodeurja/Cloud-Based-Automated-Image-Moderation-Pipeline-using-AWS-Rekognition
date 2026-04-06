@@ -118,8 +118,11 @@ def analyze_image_rekognition(file_bytes):
             if len(gen_labels) == 0:
                 is_blank = True
             else:
-                # If everything detected is just generic geometric shapes, consider it "blank"
-                generic_terms = {"Rectangle", "Square", "Shape", "Paper", "Empty", "Void", "Minimalist"}
+                # If everything detected is just generic geometric shapes/colors, consider it "blank"
+                generic_terms = {
+                    "Rectangle", "Square", "Shape", "Paper", "Empty", "Void", 
+                    "Minimalist", "White", "Black", "Background", "Grey", "Gray", "Light"
+                }
                 meaningful_labels = [l for l in gen_labels if l['Name'] not in generic_terms]
                 if not meaningful_labels:
                     is_blank = True
@@ -343,4 +346,4 @@ else:
         st.info("Ensure your AWS environment is active and permissions are granted.")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("v1.0.0 | Built with Streamlit & Boto3")
+st.sidebar.caption("v1.0.1 (FIXED BLANK DETECTION) | Built with Streamlit")
