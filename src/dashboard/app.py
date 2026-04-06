@@ -112,11 +112,24 @@ def analyze_image_rekognition(file_bytes):
         
         harmful_score = max([l['Confidence'] for l in mod_labels]) if mod_labels else 0
         
+        # Determine if image is "blank" (no moderation labels AND no meaningful objects)
+        is_blank = False
+        if len(mod_labels) == 0:
+            if len(gen_labels) == 0:
+                is_blank = True
+            else:
+                # If everything detected is just generic geometric shapes, consider it "blank"
+                generic_terms = {"Rectangle", "Square", "Shape", "Paper", "Empty", "Void", "Minimalist"}
+                meaningful_labels = [l for l in gen_labels if l['Name'] not in generic_terms]
+                if not meaningful_labels:
+                    is_blank = True
+        
         return {
             "harmful": round(harmful_score, 1),
             "safe": round(100 - harmful_score, 1),
             "raw_labels": mod_labels,
-            "is_blank": (len(mod_labels) == 0 and len(gen_labels) == 0)
+            "gen_labels": gen_labels, # Pass general labels for transparency
+            "is_blank": is_blank
         }
     except Exception as e:
         st.error(f"Rekognition Error: {e}")
@@ -300,7 +313,7 @@ else:
                             
                             if s3_success and prediction:
                                 if prediction.get('is_blank'):
-                                    st.warning("📭 **No images found**")
+                                    st.warning("📭 **Image not detected**")
                                 else:
                                     st.markdown("### 🎯 Safety Prediction")
                                     
