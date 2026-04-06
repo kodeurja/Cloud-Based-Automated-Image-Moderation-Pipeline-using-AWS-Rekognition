@@ -300,7 +300,7 @@ else:
                             
                             if s3_success and prediction:
                                 if prediction.get('is_blank'):
-                                    st.warning("📭 **No images are detected**")
+                                    st.warning("📭 **No images found**")
                                 else:
                                     st.markdown("### 🎯 Safety Prediction")
                                     
